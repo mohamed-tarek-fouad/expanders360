@@ -5,6 +5,8 @@ import { ConfigModuleConfig } from '@config/options/config.config';
 
 import { CoreModule } from '@core/core.module';
 import { I18nConfigModule } from '@features/i18n/i18n.module';
+import { DatabaseModule } from './database/database.module';
+import { AuthModule } from './auth/auth.module';
 
 import { CompressionMiddleware } from '@middlewares/performance';
 import {
@@ -24,8 +26,10 @@ import {
 @Module({
   imports: [
     ConfigModule.forRootAsync({ useClass: ConfigModuleConfig }),
+    DatabaseModule,
     I18nConfigModule,
-    CoreModule
+    CoreModule,
+    AuthModule
   ]
 })
 export class AppModule implements NestModule {

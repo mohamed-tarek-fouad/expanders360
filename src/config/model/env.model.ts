@@ -115,16 +115,7 @@ export class EnvironmentVariables {
   APP_VIRUTAL_PATH: string;
 
   @IsString()
-  ELASTICSEARCH_CLIENT_NAME: string;
-
-  @IsString()
-  ELASTICSEARCH_USERNAME: string;
-
-  @IsString()
-  ELASTICSEARCH_PASSWORD: string;
-
-  @IsString()
-  ELASTICSEARCH_NODES: string;
+  JWT_SECRET: string;
 
 }
 

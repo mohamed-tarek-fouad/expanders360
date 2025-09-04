@@ -113,17 +113,4 @@ export class ConfigService {
   get allowedHosts() {
     return this.envConfig.security.request.allowedHosts;
   }
-
-  get logging() {
-    return this.envConfig.logging;
-  }
-
-  get elasticSearch() {
-    return {
-      name: this.envConfig.ELASTICSEARCH_CLIENT_NAME,
-      username: this.envConfig.ELASTICSEARCH_USERNAME,
-      password: this.envConfig.ELASTICSEARCH_PASSWORD,
-      nodes: this.envConfig.ELASTICSEARCH_NODES
-    };
-  }
 }

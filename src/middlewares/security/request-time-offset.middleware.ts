@@ -26,7 +26,7 @@ export class RequestTimeOffsetMiddleware implements NestMiddleware {
     try {
       const requestTimeHeader = req.headers['x-request-time'] as string;
 
- 
+
 
       const requestTimeMillis = Date.parse(requestTimeHeader);
       if (isNaN(requestTimeMillis)) {

@@ -56,3 +56,5 @@ filebeat-registry
 .vscode
 
 /src/config/firebase/*
+
+/src/generated/prisma

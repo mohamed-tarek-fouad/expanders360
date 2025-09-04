@@ -22,7 +22,7 @@ export class RequestHeadersValidatorMiddleware implements NestMiddleware {
       const headersDto = plainToClass(RequestHeadersDto, req.headers);
       const errors = await validate(headersDto);
       if (errors.length > 0) {
- 
+
         const error = errors[0];
         const constraintKey = error.constraints ? Object.values(error.constraints)[0] : 'Invalid request headers';
         throw new HttpException(
