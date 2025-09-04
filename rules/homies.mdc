@@ -1,0 +1,47 @@
+---
+alwaysApply: true
+---
+
+# NestJS Project – Cursor Rules
+
+## Scope
+- Apply to all `src/**` TypeScript files.
+- New code must mirror the structure of existing modules under `src/features/*`.
+
+## Modules & Structure
+- Generate features as `src/features/<feature>/` with:
+  - `<feature>.module.ts`
+  - `controllers/`, `services/`, `entities/`, `dto/`, `repositories/`, `use-cases/`
+- Follow the exact layout/patterns used by the existing feature modules.
+
+## Imports & Style
+- Use **path aliases only** (per `tsconfig.json`), no relative deep paths.
+- Sort imports **alphabetically** within groups (builtin → external → internal/aliased).
+- Keep standard spacing/formatting; respect repo ESLint/Prettier.
+
+## Config & Envs
+- Read configuration via `@nestjs/config` (`ConfigService`) using files in `config/`.
+- Never hardcode secrets or envs; rely on the config layer.
+
+## Validation & i18n
+- All input validated with `class-validator`/`class-transformer` DTOs.
+- **All user-facing errors must use `nestjs-i18n`.**
+  - Throw exceptions with i18n keys + args; no hardcoded strings.
+  - Assume a global exception filter translates keys to messages.
+
+## Responses
+- Controllers must return **only**: `{ result: <data> }` on success.
+- No extra fields like `message`, `status`, etc., unless explicitly required by an existing pattern.
+
+## Errors
+- Use typed Nest exceptions (`BadRequestException`, etc.) carrying i18n keys.
+- Error shape handled by the global filter (e.g., `{ error: { code, message, details? } }`).
+
+## Swagger (OpenAPI)
+- Document everything:
+  - `@ApiTags`, `@ApiOperation`, `@ApiOkResponse`, `@ApiBadRequestResponse`, etc.
+  - DTOs decorated with `@ApiProperty` (types, examples).
+  - Document pagination, filters, and error schemas consistently.
+
+## Best Practices
+- follow best practices of nestjs and best standards based on docs.

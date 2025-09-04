@@ -1,0 +1,18 @@
+{
+    "code.400": "Bad request",
+    "code.401": "Unauthorized",
+    "code.403": "Forbidden",
+    "code.404": "Not found",
+    "code.405": "Method not allowed",
+    "code.409": "Conflict",
+    "code.413": "Payload too large",
+    "code.429": "Too many requests",
+    "code.500": "Internal server error",
+    "code.501": "Not implemented",
+    "expiredRequest": "Expired request",
+    "notAllowedByCORS": "Not allowed by CORS",
+    "processPaymentFailed": "Failed to process the payment",
+    "routeNotFound": "Route not found",
+    "unrecognizedHostHeader": "Unrecognized host",
+    "unrecognizedXForwardedForHeader": "Unrecognized X-Forwarded-For header"
+}

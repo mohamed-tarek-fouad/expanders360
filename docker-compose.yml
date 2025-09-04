@@ -1,0 +1,38 @@
+services:
+  api:
+    container_name: burgan-iris-api
+    restart: always
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    user: root
+    ports:
+      - '3000:3000'
+    networks:
+      - burgan-iris-network
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+      - /usr/src/app/dist
+    command: npm run start:prod
+
+  filebeat:
+    image: docker.elastic.co/beats/filebeat:9.0.0
+    container_name: notifications-filebeat
+    user: root
+    command: filebeat -e --strict.perms=false
+    volumes:
+      - ./filebeat.yml:/usr/share/filebeat/filebeat.yml:ro
+      - ./logs:/logs:ro # Your application logs
+      - ./filebeat-registry:/usr/share/filebeat/data # Persist registry state
+      - /var/lib/docker/containers:/var/lib/docker/containers:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    environment:
+      - ELASTICSEARCH_USERNAME
+      - ELASTICSEARCH_PASSWORD
+    networks:
+      - burgan-iris-network
+
+networks:
+  burgan-iris-network:
+    driver: bridge

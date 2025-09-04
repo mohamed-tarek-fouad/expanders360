@@ -1,0 +1,54 @@
+{
+  "security": {
+    "request": {
+      "maxPayloadSize": "100kb",
+      "maxTimeOffsetInSeconds": 120,
+      "allowedHosts": [
+        "localhost:3000",
+        "localhost:5173",
+        "localhost:4173"
+      ],
+      "allowedForwardedIps": []
+    },
+    "cors": {
+      "whitelist": [
+        "http://localhost:3000",
+        "http://localhost:5173",
+        "http://localhost:5174",
+        "http://localhost:4173",
+        "null"
+      ],
+      "methods": [
+        "GET",
+        "POST",
+        "PUT",
+        "PATCH",
+        "DELETE"
+      ]
+    },
+    "rateLimiter": {
+      "enabled": true,
+      "default": {
+        "points": 3,
+        "duration": 1,
+        "blockDuration": 5
+      }
+    }
+  },
+  "logging": {
+    "console": {
+      "silent": false
+    },
+    "error": {
+      "silent": false
+    },
+    "request": {
+      "file": {
+        "silent": false
+      },
+      "websocket": {
+        "silent": false
+      }
+    }
+  }
+}

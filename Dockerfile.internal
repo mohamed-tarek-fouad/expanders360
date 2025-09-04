@@ -1,0 +1,38 @@
+ARG BASE_IMAGE_NODE
+
+# Use a specific Node.js version and ensure the correct npm version
+FROM ${BASE_IMAGE_NODE} AS builder
+
+# Set our node environment
+ENV NODE_ENV=build
+
+# Copy package.json and package-lock.json first to leverage Docker cache
+COPY --chown=node:node package*.json ./
+
+# Install dependencies
+RUN npm ci
+
+# Copy source code and build the project
+COPY --chown=node:node . .
+RUN npm run build
+
+# Production stage
+FROM ${BASE_IMAGE_NODE}
+
+# Set our node environment
+ENV NODE_ENV=production
+
+# Copy only necessary production artifacts
+COPY --from=builder /app/package*.json /app/
+COPY --from=builder /app/dist/ /app/dist/
+COPY --from=builder /app/config/ /app/config/
+
+# Install only production dependencies
+RUN npm ci --omit=dev && npm cache clean --force
+
+ARG PORT=3000
+ENV PORT=$PORT
+EXPOSE $PORT
+
+# Start the application
+CMD ["node", "dist/main"]
