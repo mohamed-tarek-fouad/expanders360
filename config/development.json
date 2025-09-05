@@ -1,7 +1,7 @@
 {
   "security": {
     "request": {
-      "maxPayloadSize": "100kb",
+      "maxPayloadSize": "10000kb",
       "maxTimeOffsetInSeconds": 120,
       "allowedHosts": [
         "localhost:3000",

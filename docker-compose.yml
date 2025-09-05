@@ -17,8 +17,10 @@ services:
     command: npm run start:prod
     depends_on:
       - mysql
+      - mongodb
     environment:
       - DATABASE_URL=mysql://root:password@mysql:3306/expanders360
+      - MONGODB_URI=mongodb://mongodb:27017/expanders360_docs
       - JWT_SECRET=your-super-secret-jwt-key-here
 
   mysql:
@@ -38,8 +40,20 @@ services:
       - burgan-iris-network
     command: --default-authentication-plugin=mysql_native_password
 
+  mongodb:
+    image: mongo:7.0
+    container_name: expanders360-mongodb
+    restart: always
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - burgan-iris-network
+
 volumes:
   mysql_data:
+  mongodb_data:
 
 networks:
   burgan-iris-network:
